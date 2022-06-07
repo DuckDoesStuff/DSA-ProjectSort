@@ -56,7 +56,7 @@ void algoMode(char* argv[]) {
         cout << "Running time: " << time << endl;
     else if (strcmp(argv[4], "-comp") == 0)
         cout << "Comparisons: " << comparison << endl;
-    else if (strcmp(argv[4], "-both")) {
+    else if (strcmp(argv[4], "-both") == 0) {
         cout << "Running time: " << time << endl;
         cout << "Comparisons: " << comparison << endl;
     }
