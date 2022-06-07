@@ -20,10 +20,10 @@ int main(int argc, char *argv[]) {
 
 
     // vector<int> arr;
-    // GenerateData(arr, 1000, 0);
+    // GenerateData(arr, 100000, 0);
     // ofstream out("inputs\\input.txt");
-    // out << "1000" << endl;
-    // for(int i = 0; i < 1000; i++) {
+    // out << "100000" << endl;
+    // for(int i = 0; i < 100000; i++) {
     //     out << arr[i] << " ";
     // }
     // out.close();

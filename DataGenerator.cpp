@@ -63,16 +63,16 @@ void GenerateData(vector<int> &a, int n, int dataType)
 {
 	switch (dataType)
 	{
-	case 0:	// ngẫu nhiên
+	case 0:	// -rand
 		GenerateRandomData(a, n);
 		break;
-	case 1:	// có thứ tự
+	case 1:	// -sorted
 		GenerateSortedData(a, n);
 		break;
-	case 2:	// có thứ tự ngược
+	case 2:	// -rev
 		GenerateReverseData(a, n);
 		break;
-	case 3:	// gần như có thứ tự
+	case 3:	// -nsorted
 		GenerateNearlySortedData(a, n);
 		break;
 	default:
