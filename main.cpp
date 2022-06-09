@@ -2,6 +2,7 @@
 #include "func.h"
 #include "algoMode.h"
 #include "DataGenerator.h"
+#include "compMode.h"
 
 using namespace std;
 

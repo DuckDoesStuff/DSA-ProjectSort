@@ -58,14 +58,6 @@ int getAlgoName(string args) {
     else return -1;
 }
 
-// int getInput(string args) {
-//     //If an input size or a file path
-//     if (isNum(args)) {
-//         return stoi(args);
-//     } else {
-//     }
-// }
-
 int getDataOrder(string args, int type) {
     if(args == "-rand" || type == 0) {
         cout << "Input order: Randomized" << endl;
@@ -105,30 +97,29 @@ void algoMode(char* argv[], int &argc) {
     if(cmd3) {
         for(int i = 0; i < 4; i++) {
             getDataOrder("", i);
-            int comparison = 0;
+            int comparision = 0;
             auto start = chrono::high_resolution_clock::now();
-            // quickSort(arr[i], 0, arr[i].size() - 1, comparison);
-            runAlgo(getAlgoName(argv[2]), arr[i], comparison);
+            runAlgo(getAlgoName(argv[2]), arr[i], comparision);
             auto end = chrono::high_resolution_clock::now();
 
             auto time = chrono::duration_cast<chrono::milliseconds>(end - start).count();
 
-            outputConsole(time, comparison, getOutput(argv[4]));
+            outputConsole(time, comparision, getOutput(argv[4]));
         }
         return;
     }
 
-    int comparison = 0;
+    int comparision = 0;
 
     auto start = chrono::high_resolution_clock::now();
-    runAlgo(getAlgoName(argv[2]), arr[0], comparison);
+    runAlgo(getAlgoName(argv[2]), arr[0], comparision);
     auto end = chrono::high_resolution_clock::now();
     auto time = chrono::duration_cast<chrono::milliseconds>(end - start).count();
 
     writeFile(arr[0], "output.txt");
 
-    if (argc == 5) outputConsole(time, comparison, getOutput(argv[4]));
-    else if (argc == 6) outputConsole(time, comparison, getOutput(argv[5]));
+    if (argc == 5) outputConsole(time, comparision, getOutput(argv[4]));
+    else if (argc == 6) outputConsole(time, comparision, getOutput(argv[5]));
     return;
 }
 
@@ -168,9 +159,11 @@ vector<vector<int>> makeInput(char* argv[], int &argc, bool &flag) {
         }else {
             flag = true;
             //Command to create 4 arrays
+            string fileNames[4] = {"input_1.txt", "input_2.txt", "input_3.txt", "input_4.txt"};
             cout << "Input size: " << argv[3] << endl << endl;
             for(int i = 0; i < 4; i++) {
                 arr.push_back(genNewInput(stoi(argv[3]), i));
+                writeFile(arr[i], fileNames[i]);
             }
         }
     }else if (argc == 6) {//Command 2

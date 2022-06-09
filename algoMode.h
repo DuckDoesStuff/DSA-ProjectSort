@@ -18,7 +18,6 @@ void runAlgo(int algo, vector<int> &arr, int &comparison);
 
 bool isNum(string args);
 int getAlgoName(string args);
-int getInput(string args);
 int getDataOrder(string args, int type);
 int getOutput(string args);
 
