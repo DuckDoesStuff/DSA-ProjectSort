@@ -1,17 +1,11 @@
 #include "compMode.h"
 
-void outputAlgoName(int algo) {
-    switch (algo)
-    {
-    case 1:
-        cout << "Quick sort";
-        break;  
-    default:
-        break;
-    }
+void outputAlgoNameC(int algo) {
+    string algoName[] = {"Quick sort", "Bubble sort"};
+    cout << algoName[algo - 1];
 }
 
-void writeFile(vector<int> &arr, string fileName) {
+void writeFileC(vector<int> &arr, string fileName) {
     ofstream out;
     out.open(fileName);
     int n = arr.size();
@@ -22,24 +16,29 @@ void writeFile(vector<int> &arr, string fileName) {
     out.close();
 }
 
-void runAlgo(int algo, vector<int> &arr, int &comparison) {
+void runAlgoC(int algo, vector<int> &arr, long long &comparision) {
     switch (algo)
     {
     case 1:
-        quickSort(arr, 0, arr.size() - 1, comparison);
+        quickSort(arr, 0, arr.size() - 1, comparision);
+        break;
+    case 2:
+        bubbleSort(arr, arr.size(), comparision);
         break;
     default:
         break;
     }
 }
 
-int getAlgoName(string args) {
+int getAlgoNameC(string args) {
     if(args == "quick-sort")
         return 1;
+    else if (args == "bubble-sort")
+        return 2;
     else return -1;
 }
 
-int getDataOrder(string args, int type) {
+int getDataOrderC(string args, int type) {
     if(args == "-rand" || type == 0) {
         cout << "Input order: Randomized" << endl;
         cout << "-----------------------------------" << endl;
@@ -66,30 +65,30 @@ int getDataOrder(string args, int type) {
 void compMode(char* argv[], int &argc) {
     cout << "COMPARISON MODE" << endl;
     cout << "Algorithm: "; 
-    outputAlgoName(getAlgoName(argv[2]));
+    outputAlgoNameC(getAlgoNameC(argv[2]));
     cout << " | ";
-    outputAlgoName(getAlgoName(argv[3]));
+    outputAlgoNameC(getAlgoNameC(argv[3]));
     cout << endl;
     vector<int> arr1;
     if(argc == 5) {
         //Command 4
-        arr1 = readFromPath(argv);
+        arr1 = readFromPathC(argv);
     } else if(argc == 6) {
         //Command 5
-        GenerateData(arr1, stoi(argv[4]), getDataOrder(argv[5], -1));
-        writeFile(arr1, "input.txt");
+        GenerateData(arr1, stoi(argv[4]), getDataOrderC(argv[5], -1));
+        writeFileC(arr1, "input.txt");
     }
     vector<int> arr2 = arr1;
 
-    int comparision1 = 0;
+    long long comparision1 = 0;
     auto start1 = chrono::high_resolution_clock::now();
-    runAlgo(getAlgoName(argv[2]), arr1, comparision1);
+    runAlgoC(getAlgoNameC(argv[2]), arr1, comparision1);
     auto end1 = chrono::high_resolution_clock::now();
     auto time1 = chrono::duration_cast<chrono::milliseconds>(end1 - start1).count();
 
-    int comparision2 = 0;
+    long long comparision2 = 0;
     auto start2 = chrono::high_resolution_clock::now();
-    runAlgo(getAlgoName(argv[3]), arr2, comparision2);
+    runAlgoC(getAlgoNameC(argv[3]), arr2, comparision2);
     auto end2 = chrono::high_resolution_clock::now();
     auto time2 = chrono::duration_cast<chrono::milliseconds>(end2 - start2).count();
 
@@ -97,7 +96,7 @@ void compMode(char* argv[], int &argc) {
     cout << "Comparisions: " << comparision1 << " | " << comparision2 << endl;
 }
 
-vector<int> readFromPath(char* argv[]) {
+vector<int> readFromPathC(char* argv[]) {
     cout << "Input file: " << argv[4] << endl;
     ifstream in;
     in.open(argv[4]);
@@ -105,7 +104,7 @@ vector<int> readFromPath(char* argv[]) {
     string s;
     getline(in, s);
 
-    int n = stoi(s);
+    long long n = stoi(s);
     cout << "Input size: " << n << endl;
     cout << "-----------------------------------" << endl;
     vector<int> arr;

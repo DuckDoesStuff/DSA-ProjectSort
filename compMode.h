@@ -11,14 +11,14 @@
 
 using namespace std;
 
-void outputAlgoName(int algo);
+void outputAlgoNameC(int algo);
 
-void runAlgo(int algo, vector<int> &arr, int &comparison);
+void runAlgoC(int algo, vector<int> &arr, long long &comparison);
 
-int getAlgoName(string args);
+int getAlgoNameC(string args);
 
-int getDataOrder(string args, int type);
+int getDataOrderC(string args, int type);
 
 void compMode(char* argv[], int &argc);
 
-vector<int> readFromPath(char* argv[]);
+vector<int> readFromPathC(char* argv[]);

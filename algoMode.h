@@ -12,9 +12,9 @@
 using namespace std;
 
 void writeFile(vector<int> &arr, string fileName);
-void outputConsole(int time, int comparison, int output);
+void outputConsole(int time, long long comparison, int output);
 void outputAlgoName(int algo);
-void runAlgo(int algo, vector<int> &arr, int &comparison);
+void runAlgo(int algo, vector<int> &arr, long long &comparison);
 
 bool isNum(string args);
 int getAlgoName(string args);
@@ -23,6 +23,6 @@ int getOutput(string args);
 
 void algoMode(char* argv[], int &argc);
 
-vector<int> genNewInput(int size, int dataOrder);
+vector<int> genNewInput(long long size, int dataOrder);
 vector<int> readFromPath(char* argv[]);
 vector<vector<int>> makeInput(char* argv[], int &argc, bool &flag);

@@ -12,5 +12,8 @@
 using namespace std;
 
 //quickSort functions
-int partition(vector<int> &arr, int start, int end, int &comparison);
-void quickSort(vector<int> &arr, int start, int end, int &comparison);
+int partition(vector<int> &arr, long long start, long long end, long long &comparison);
+void quickSort(vector<int> &arr, long long start, long long end, long long &comparison);
+
+//bubbleSort functions
+void bubbleSort(vector<int> &arr, long long n, long long &comparision);

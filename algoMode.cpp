@@ -11,7 +11,7 @@ void writeFile(vector<int> &arr, string fileName) {
     out.close();
 }
 
-void outputConsole(int time, int comparison, int output) {
+void outputConsole(int time, long long comparison, int output) {
     if(output == 1) cout << "Comparisons: " << comparison << endl;
     else if (output == 2) cout << "Running time: " << time << endl;
     else if (output == 3) {
@@ -22,25 +22,19 @@ void outputConsole(int time, int comparison, int output) {
 }
 
 void outputAlgoName(int algo) {
-    cout << "Algorithm: ";
-    switch (algo)
-    {
-    case 1:
-        cout << "Quick sort" << endl;
-        break;
-    
-    default:
-        break;
-    }
+    string algoName[] = {"Quick sort", "Bubble sort"};
+    cout << "Algorithm: " << algoName[algo - 1] << endl;
 }
 
-void runAlgo(int algo, vector<int> &arr, int &comparison) {
+void runAlgo(int algo, vector<int> &arr, long long &comparison) {
     switch (algo)
     {
     case 1:
         quickSort(arr, 0, arr.size() - 1, comparison);
         break;
-    
+    case 2:
+        bubbleSort(arr, arr.size(), comparison);
+        break;
     default:
         break;
     }
@@ -55,6 +49,8 @@ bool isNum(string args) {
 int getAlgoName(string args) {
     if(args == "quick-sort")
         return 1;
+    else if(args == "bubble-sort")
+        return 2;
     else return -1;
 }
 
@@ -97,7 +93,7 @@ void algoMode(char* argv[], int &argc) {
     if(cmd3) {
         for(int i = 0; i < 4; i++) {
             getDataOrder("", i);
-            int comparision = 0;
+            long long comparision = 0;
             auto start = chrono::high_resolution_clock::now();
             runAlgo(getAlgoName(argv[2]), arr[i], comparision);
             auto end = chrono::high_resolution_clock::now();
@@ -109,7 +105,7 @@ void algoMode(char* argv[], int &argc) {
         return;
     }
 
-    int comparision = 0;
+    long long comparision = 0;
 
     auto start = chrono::high_resolution_clock::now();
     runAlgo(getAlgoName(argv[2]), arr[0], comparision);
@@ -123,7 +119,7 @@ void algoMode(char* argv[], int &argc) {
     return;
 }
 
-vector<int> genNewInput(int size, int dataOrder) {
+vector<int> genNewInput(long long size, int dataOrder) {
     vector<int> arr;
     GenerateData(arr, size, dataOrder);
     return arr;
