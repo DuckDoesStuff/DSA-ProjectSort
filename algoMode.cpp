@@ -26,7 +26,8 @@ void outputAlgoName(int algo) {
     cout << "Algorithm: " << algoName[algo - 1] << endl;
 }
 
-void runAlgo(int algo, vector<int> &arr, long long &comparison) {
+int runAlgo(int algo, vector<int> &arr, long long &comparison) {
+    auto start = chrono::high_resolution_clock::now();
     switch (algo)
     {
     case 1:
@@ -38,6 +39,9 @@ void runAlgo(int algo, vector<int> &arr, long long &comparison) {
     default:
         break;
     }
+    auto end = chrono::high_resolution_clock::now();
+    auto time = chrono::duration_cast<chrono::milliseconds>(end - start).count();
+    return time;
 }
 
 bool isNum(string args) {
@@ -91,14 +95,11 @@ void algoMode(char* argv[], int &argc) {
     bool cmd3 = false;
     vector<vector<int>> arr = makeInput(argv, argc, cmd3);
     if(cmd3) {
+        //Command 3
         for(int i = 0; i < 4; i++) {
             getDataOrder("", i);
             long long comparision = 0;
-            auto start = chrono::high_resolution_clock::now();
-            runAlgo(getAlgoName(argv[2]), arr[i], comparision);
-            auto end = chrono::high_resolution_clock::now();
-
-            auto time = chrono::duration_cast<chrono::milliseconds>(end - start).count();
+            int time = runAlgo(getAlgoName(argv[2]), arr[i], comparision);
 
             outputConsole(time, comparision, getOutput(argv[4]));
         }
@@ -107,10 +108,7 @@ void algoMode(char* argv[], int &argc) {
 
     long long comparision = 0;
 
-    auto start = chrono::high_resolution_clock::now();
-    runAlgo(getAlgoName(argv[2]), arr[0], comparision);
-    auto end = chrono::high_resolution_clock::now();
-    auto time = chrono::duration_cast<chrono::milliseconds>(end - start).count();
+    int time = runAlgo(getAlgoName(argv[2]), arr[0], comparision);
 
     writeFile(arr[0], "output.txt");
 

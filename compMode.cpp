@@ -16,7 +16,8 @@ void writeFileC(vector<int> &arr, string fileName) {
     out.close();
 }
 
-void runAlgoC(int algo, vector<int> &arr, long long &comparision) {
+int runAlgoC(int algo, vector<int> &arr, long long &comparision) {
+    auto start = chrono::high_resolution_clock::now();
     switch (algo)
     {
     case 1:
@@ -28,6 +29,9 @@ void runAlgoC(int algo, vector<int> &arr, long long &comparision) {
     default:
         break;
     }
+    auto end = chrono::high_resolution_clock::now();
+    auto time = chrono::duration_cast<chrono::milliseconds>(end - start).count();
+    return time;
 }
 
 int getAlgoNameC(string args) {
@@ -81,16 +85,10 @@ void compMode(char* argv[], int &argc) {
     vector<int> arr2 = arr1;
 
     long long comparision1 = 0;
-    auto start1 = chrono::high_resolution_clock::now();
-    runAlgoC(getAlgoNameC(argv[2]), arr1, comparision1);
-    auto end1 = chrono::high_resolution_clock::now();
-    auto time1 = chrono::duration_cast<chrono::milliseconds>(end1 - start1).count();
+    int time1 = runAlgoC(getAlgoNameC(argv[2]), arr1, comparision1);
 
     long long comparision2 = 0;
-    auto start2 = chrono::high_resolution_clock::now();
-    runAlgoC(getAlgoNameC(argv[3]), arr2, comparision2);
-    auto end2 = chrono::high_resolution_clock::now();
-    auto time2 = chrono::duration_cast<chrono::milliseconds>(end2 - start2).count();
+    int time2 = runAlgoC(getAlgoNameC(argv[3]), arr2, comparision2);
 
     cout << "Running time: " << time1 << " | " << time2 << endl;
     cout << "Comparisions: " << comparision1 << " | " << comparision2 << endl;

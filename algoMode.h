@@ -14,7 +14,7 @@ using namespace std;
 void writeFile(vector<int> &arr, string fileName);
 void outputConsole(int time, long long comparison, int output);
 void outputAlgoName(int algo);
-void runAlgo(int algo, vector<int> &arr, long long &comparison);
+int runAlgo(int algo, vector<int> &arr, long long &comparison);
 
 bool isNum(string args);
 int getAlgoName(string args);
