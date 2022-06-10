@@ -1,29 +1,32 @@
 #include "func.h"
 
 int partition(vector<int> &arr, long long start, long long end, long long &comparison) {
-    int pivot = arr[end];
-    int l = start, r = end - 1;
+    int pivot = arr[(end + start) / 2];
+    int l = start, r = end;
 
-    while(++comparison) {
-        while(++comparison && arr[l] < pivot && ++comparison && l <= r) {
+    while(true) {
+        //Looking for value > than pivot but on the left side
+        while(++comparison && arr[l] < pivot) {
             l++;
         }
-        while(++comparison && arr[r] > pivot && ++comparison && l <= r) {
+        //Looking for value < than pivot but on the right side
+        while(++comparison && arr[r] > pivot) {
             r--;
         }
-        if(++comparison && l >= r) break;
+        if(++comparison && l > r) break;
+        //Swap the two values found
         swap(arr[l], arr[r]);
 
         l++;
         r--;
     }
-    swap(arr[l], arr[end]);
+    // swap(arr[l], arr[end]);//use this when pivot is the last element
     return l;
 }
 
 void quickSort(vector<int> &arr, long long start, long long end, long long &comparison) {
     if(++comparison && start < end) {
-        int pivot = partition(arr, start, end, comparison);;
+        int pivot = partition(arr, start, end, comparison);
 
         quickSort(arr, start, pivot - 1, comparison);
         quickSort(arr, pivot + 1, end, comparison);
