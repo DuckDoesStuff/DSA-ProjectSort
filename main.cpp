@@ -16,20 +16,6 @@ int main(int argc, char *argv[]) {
         compMode(argv, argc);
     }else cout << "Invalid command!" << endl;
 
-
-
-
-
-
-    // vector<int> arr;
-    // GenerateData(arr, 100000, 0);
-    // ofstream out("inputs\\input.txt");
-    // out << "100000" << endl;
-    // for(int i = 0; i < 100000; i++) {
-    //     out << arr[i] << " ";
-    // }
-    // out.close();
-
     system("pause");
     return 0;
 }   

@@ -17,3 +17,6 @@ void quickSort(vector<int> &arr, long long start, long long end, long long &comp
 
 //bubbleSort functions
 void bubbleSort(vector<int> &arr, long long n, long long &comparision);
+
+//insertionSort functions
+void insertionSort(vector<int> &arr, long long n, long long &comarison);

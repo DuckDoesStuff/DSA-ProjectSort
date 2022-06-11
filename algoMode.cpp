@@ -22,7 +22,8 @@ void outputConsole(int time, long long comparison, int output) {
 }
 
 void outputAlgoName(int algo) {
-    string algoName[] = {"Quick sort", "Bubble sort"};
+    string algoName[] = {"Quick sort", "Bubble sort", "Insertion sort", "Heap sort",
+                         "Selection sort", "Radix sort", "Merge sort"};
     cout << "Algorithm: " << algoName[algo - 1] << endl;
 }
 
@@ -35,6 +36,16 @@ int runAlgo(int algo, vector<int> &arr, long long &comparison) {
         break;
     case 2:
         bubbleSort(arr, arr.size(), comparison);
+        break;
+    case 3://Insertion sort
+        break;
+    case 4://Heap sort
+        break;
+    case 5://Selection sort
+        break;
+    case 6://Radix sort
+        break;
+    case 7://Merge sort
         break;
     default:
         break;
@@ -53,8 +64,18 @@ bool isNum(string args) {
 int getAlgoName(string args) {
     if(args == "quick-sort")
         return 1;
-    else if(args == "bubble-sort")
+    else if (args == "bubble-sort")
         return 2;
+    else if (args == "insertion-sort")
+        return 3;
+    else if (args == "heap-sort")
+        return 4;
+    else if (args == "selection-sort")
+        return 5;
+    else if (args == "radix-sort")
+        return 6;
+    else if (args == "merge-sort")
+        return 7;
     else return -1;
 }
 

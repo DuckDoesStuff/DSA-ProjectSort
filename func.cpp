@@ -41,4 +41,3 @@ void bubbleSort(vector<int> &arr, long long n, long long &comparision)
             if (++comparision && arr[j] > arr[j + 1])
                 swap(arr[j], arr[j + 1]);
 }
-
