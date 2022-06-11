@@ -141,20 +141,20 @@ void algoMode(char* argv[], int &argc) {
     vector<vector<int>> arr = makeInput(argv, argc, cmd3);
     if(cmd3) {
         //Command 3
-        if (getOutput(argv[4]) == 2)//Output time
-            for(int i = 0; i < 4; i++) {
-                getDataOrder("", i);
-                int time = runAlgoT(getAlgoName(argv[2]), arr[i]);
-
-                outputConsole(time, 0, getOutput(argv[4]));
-            }
-        else if (getOutput(argv[4]) == 1)//Output comp
+        if (getOutput(argv[4]) == 1)//Output comp
             for(int i = 0; i < 4; i++) {
                 getDataOrder("", i);
                 long long comparision = 0;
                 runAlgoCmp(getAlgoName(argv[2]), arr[i], comparision);
 
-                outputConsole(0, comparision, getOutput(argv[4]));
+                outputConsole(0, comparision, 1);
+            }
+        else if (getOutput(argv[4]) == 2)//Output time
+            for(int i = 0; i < 4; i++) {
+                getDataOrder("", i);
+                int time = runAlgoT(getAlgoName(argv[2]), arr[i]);
+
+                outputConsole(time, 0, 2);
             }
         else {//Output both
             vector<vector<int>> arrT = arr;
@@ -174,9 +174,27 @@ void algoMode(char* argv[], int &argc) {
             }
         }
         return;
-    }     
+    }else {
+        if(getOutput(argv[argc - 1]) == 1) {//Output comp
+            long long comparison = 0;
+            runAlgoCmp(getAlgoName(argv[2]), arr[0], comparison);
+            outputConsole(0, comparison, 1);
+        }else if(getOutput(argv[argc - 1]) == 2) {//Output time
+            int time = -1;
+            time = runAlgoT(getAlgoName(argv[2]), arr[0]);
+            outputConsole(time, 0, 2);
+        }else {
+            long long comparison = 0;
+            int time = -1;
+            vector<vector<int>> arrT = arr;
+            runAlgoCmp(getAlgoName(argv[2]), arr[0], comparison);
+            time = runAlgoT(getAlgoName(argv[2]), arrT[0]);
+            outputConsole(time, comparison, 3);
+        }
 
-    writeFile(arr[0], "output.txt");
+        writeFile(arr[0], "output.txt");
+    }
+
     return;
 }
 
