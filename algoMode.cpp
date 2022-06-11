@@ -32,10 +32,10 @@ int runAlgo(int algo, vector<int> &arr, long long &comparison) {
     switch (algo)
     {
     case 1:
-        quickSort(arr, 0, arr.size() - 1, comparison);
+        quickSortC(arr, 0, arr.size() - 1, comparison);
         break;
     case 2:
-        bubbleSort(arr, arr.size(), comparison);
+        bubbleSortC(arr, arr.size(), comparison);
         break;
     case 3://Insertion sort
         break;

@@ -1,6 +1,7 @@
 #include "func.h"
 
-int partition(vector<int> &arr, long long start, long long end, long long &comparison) {
+//quickSort functions
+int partitionC(vector<int> &arr, long long start, long long end, long long &comparison) {
     int pivot = arr[(end + start) / 2];
     int l = start, r = end;
 
@@ -24,16 +25,51 @@ int partition(vector<int> &arr, long long start, long long end, long long &compa
     return l;
 }
 
-void quickSort(vector<int> &arr, long long start, long long end, long long &comparison) {
+void quickSortC(vector<int> &arr, long long start, long long end, long long &comparison) {
     if(++comparison && start < end) {
-        int pivot = partition(arr, start, end, comparison);
+        int pivot = partitionC(arr, start, end, comparison);
 
-        quickSort(arr, start, pivot - 1, comparison);
-        quickSort(arr, pivot + 1, end, comparison);
+        quickSortC(arr, start, pivot - 1, comparison);
+        quickSortC(arr, pivot + 1, end, comparison);
     }
 }
 
-void bubbleSort(vector<int> &arr, long long n, long long &comparision)
+int partitionT(vector<int> &arr, long long start, long long end) {
+    int pivot = arr[(end + start) / 2];
+    int l = start, r = end;
+
+    while(true) {
+        //Looking for value > than pivot but on the left side
+        while(arr[l] < pivot) {
+            l++;
+        }
+        //Looking for value < than pivot but on the right side
+        while(arr[r] > pivot) {
+            r--;
+        }
+        if(l > r) break;
+        //Swap the two values found
+        swap(arr[l], arr[r]);
+
+        l++;
+        r--;
+    }
+    // swap(arr[l], arr[end]);//use this when pivot is the last element
+    return l;
+}
+
+void quickSortT(vector<int> &arr, long long start, long long end) {
+    if(start < end) {
+        int pivot = partitionT(arr, start, end);
+
+        quickSortT(arr, start, pivot - 1);
+        quickSortT(arr, pivot + 1, end);
+    }
+}
+
+
+//bubbleSort functions
+void bubbleSortC(vector<int> &arr, long long n, long long &comparision)
 {
     int i, j;
     for (i = 0;++comparision && i < n - 1; i++)
@@ -41,3 +77,15 @@ void bubbleSort(vector<int> &arr, long long n, long long &comparision)
             if (++comparision && arr[j] > arr[j + 1])
                 swap(arr[j], arr[j + 1]);
 }
+
+void bubbleSortT(vector<int> &arr, long long n)
+{
+    int i, j;
+    for (i = 0;i < n - 1; i++)
+        for (j = 0;j < n - i - 1; j++)
+            if (arr[j] > arr[j + 1])
+                swap(arr[j], arr[j + 1]);
+}
+
+
+//insertionSort functions

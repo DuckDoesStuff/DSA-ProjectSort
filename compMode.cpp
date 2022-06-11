@@ -22,10 +22,10 @@ int runAlgoC(int algo, vector<int> &arr, long long &comparision) {
     switch (algo)
     {
     case 1:
-        quickSort(arr, 0, arr.size() - 1, comparision);
+        quickSortC(arr, 0, arr.size() - 1, comparision);
         break;
     case 2:
-        bubbleSort(arr, arr.size(), comparision);
+        bubbleSortC(arr, arr.size(), comparision);
         break;
     case 3://Insertion sort
         break;

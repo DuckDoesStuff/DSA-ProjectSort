@@ -12,11 +12,14 @@
 using namespace std;
 
 //quickSort functions
-int partition(vector<int> &arr, long long start, long long end, long long &comparison);
-void quickSort(vector<int> &arr, long long start, long long end, long long &comparison);
+int partitionC(vector<int> &arr, long long start, long long end, long long &comparison);
+void quickSortC(vector<int> &arr, long long start, long long end, long long &comparison);
+
+int partitionT(vector<int> &arr, long long start, long long end);
+void quickSortT(vector<int> &arr, long long start, long long end);
 
 //bubbleSort functions
-void bubbleSort(vector<int> &arr, long long n, long long &comparision);
+void bubbleSortC(vector<int> &arr, long long n, long long &comparision);
+void bubbleSortT(vector<int> &arr, long long n);
 
 //insertionSort functions
-void insertionSort(vector<int> &arr, long long n, long long &comarison);
