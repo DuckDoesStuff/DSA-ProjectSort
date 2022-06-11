@@ -27,8 +27,35 @@ void outputAlgoName(int algo) {
     cout << "Algorithm: " << algoName[algo - 1] << endl;
 }
 
-int runAlgo(int algo, vector<int> &arr, long long &comparison) {
+int runAlgoT(int algo, vector<int> &arr) {
     auto start = chrono::high_resolution_clock::now();
+    switch (algo)
+    {
+    case 1:
+        quickSortT(arr, 0, arr.size() - 1);
+        break;
+    case 2:
+        bubbleSortT(arr, arr.size());
+        break;
+    case 3://Insertion sort
+        break;
+    case 4://Heap sort
+        break;
+    case 5://Selection sort
+        break;
+    case 6://Radix sort
+        break;
+    case 7://Merge sort
+        break;
+    default:
+        break;
+    }
+    auto end = chrono::high_resolution_clock::now();
+    auto time = chrono::duration_cast<chrono::milliseconds>(end - start).count();
+    return time;
+}
+
+void runAlgoCmp(int algo, vector<int> &arr, long long &comparison) {
     switch (algo)
     {
     case 1:
@@ -50,9 +77,6 @@ int runAlgo(int algo, vector<int> &arr, long long &comparison) {
     default:
         break;
     }
-    auto end = chrono::high_resolution_clock::now();
-    auto time = chrono::duration_cast<chrono::milliseconds>(end - start).count();
-    return time;
 }
 
 bool isNum(string args) {
@@ -117,24 +141,42 @@ void algoMode(char* argv[], int &argc) {
     vector<vector<int>> arr = makeInput(argv, argc, cmd3);
     if(cmd3) {
         //Command 3
-        for(int i = 0; i < 4; i++) {
-            getDataOrder("", i);
-            long long comparision = 0;
-            int time = runAlgo(getAlgoName(argv[2]), arr[i], comparision);
+        if (getOutput(argv[4]) == 2)//Output time
+            for(int i = 0; i < 4; i++) {
+                getDataOrder("", i);
+                int time = runAlgoT(getAlgoName(argv[2]), arr[i]);
 
-            outputConsole(time, comparision, getOutput(argv[4]));
+                outputConsole(time, 0, getOutput(argv[4]));
+            }
+        else if (getOutput(argv[4]) == 1)//Output comp
+            for(int i = 0; i < 4; i++) {
+                getDataOrder("", i);
+                long long comparision = 0;
+                runAlgoCmp(getAlgoName(argv[2]), arr[i], comparision);
+
+                outputConsole(0, comparision, getOutput(argv[4]));
+            }
+        else {//Output both
+            vector<vector<int>> arrT = arr;
+            int time[4] = {-1, -1, -1, -1};
+            long long comp[4] = {0};
+
+            //Measure time
+            for(int i = 0; i < 4; i++)
+                time[i] = runAlgoT(getAlgoName(argv[2]), arrT[i]);
+            //Count comparison
+            for(int i = 0; i < 4; i++)
+                runAlgoCmp(getAlgoName(argv[2]), arr[i], comp[i]);
+
+            for(int i = 0; i < 4; i++) {
+                getDataOrder("", i);
+                outputConsole(time[i], comp[i], 3);
+            }
         }
         return;
-    }
-
-    long long comparision = 0;
-
-    int time = runAlgo(getAlgoName(argv[2]), arr[0], comparision);
+    }     
 
     writeFile(arr[0], "output.txt");
-
-    if (argc == 5) outputConsole(time, comparision, getOutput(argv[4]));
-    else if (argc == 6) outputConsole(time, comparision, getOutput(argv[5]));
     return;
 }
 
