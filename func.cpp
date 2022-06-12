@@ -1,72 +1,47 @@
 #include "func.h"
 
 //quickSort functions
-int partitionC(vector<int> &arr, long long start, long long end, long long &comparison) {
-    int pivot = arr[(end + start) / 2];
-    int l = start, r = end;
+void quickSortC(vector<int> &arr, long long l, long long r, long long &comp) {
+	int p = arr[(l + r) / 2];
+	int i = l, j = r;
 
-    while(true) {
-        //Looking for value > than pivot but on the left side
-        while(++comparison && arr[l] < pivot) {
-            l++;
-        }
-        //Looking for value < than pivot but on the right side
-        while(++comparison && arr[r] > pivot) {
-            r--;
-        }
-        if(++comparison && l > r) break;
-        //Swap the two values found
-        swap(arr[l], arr[r]);
-
-        l++;
-        r--;
-    }
-    // swap(arr[l], arr[end]);//use this when pivot is the last element
-    return l;
+	while (++comp && i < j) {
+		while (++comp && arr[i] < p) i++;
+		while (++comp && arr[j] > p) j--;
+		if (++comp && i <= j) {
+			swap(arr[i], arr[j]);
+			i++;
+			j--;
+		}
+	}
+	if (++comp && i < r) {
+		quickSortC(arr, i, r, comp);
+	}
+	if (++ comp && l < j) {
+		quickSortC(arr, l, j, comp);
+	}
 }
 
-void quickSortC(vector<int> &arr, long long start, long long end, long long &comparison) {
-    if(++comparison && start < end) {
-        int pivot = partitionC(arr, start, end, comparison);
+void quickSortT(vector<int> &arr, long long l, long long r) {
+	int p = arr[(l + r) / 2];
+	int i = l, j = r;
 
-        quickSortC(arr, start, pivot - 1, comparison);
-        quickSortC(arr, pivot + 1, end, comparison);
-    }
+	while (i < j) {
+		while (arr[i] < p) i++;
+		while (arr[j] > p) j--;
+		if (i <= j) {
+			swap(arr[i], arr[j]);
+			i++;
+			j--;
+		}
+	}
+	if (i < r) {
+		quickSortT(arr, i, r);
+	}
+	if (l < j) {
+		quickSortT(arr, l, j);
+	}
 }
-
-int partitionT(vector<int> &arr, long long start, long long end) {
-    int pivot = arr[(end + start) / 2];
-    int l = start, r = end;
-
-    while(true) {
-        //Looking for value > than pivot but on the left side
-        while(arr[l] < pivot) {
-            l++;
-        }
-        //Looking for value < than pivot but on the right side
-        while(arr[r] > pivot) {
-            r--;
-        }
-        if(l > r) break;
-        //Swap the two values found
-        swap(arr[l], arr[r]);
-
-        l++;
-        r--;
-    }
-    // swap(arr[l], arr[end]);//use this when pivot is the last element
-    return l;
-}
-
-void quickSortT(vector<int> &arr, long long start, long long end) {
-    if(start < end) {
-        int pivot = partitionT(arr, start, end);
-
-        quickSortT(arr, start, pivot - 1);
-        quickSortT(arr, pivot + 1, end);
-    }
-}
-
 
 //bubbleSort functions
 void bubbleSortC(vector<int> &arr, long long n, long long &comparision)
@@ -89,3 +64,33 @@ void bubbleSortT(vector<int> &arr, long long n)
 
 
 //insertionSort functions
+
+
+//selectionSort functions
+void selectionSortC(vector<int> &arr, int n, long long &comp) {
+    int i, j, min_idx;
+ 
+    for (i = 0;++comp && i < n-1; i++)
+    {
+        min_idx = i;
+        for (j = i+1;++comp && j < n; j++)
+        if (++comp && arr[j] < arr[min_idx])
+            min_idx = j;
+
+        swap(arr[min_idx], arr[i]);
+    }
+}
+
+void selectionSortT(vector<int> &arr, int n) {
+    int i, j, min_idx;
+ 
+    for (i = 0; i < n-1; i++)
+    {
+        min_idx = i;
+        for (j = i+1; j < n; j++)
+        if (arr[j] < arr[min_idx])
+            min_idx = j;
+
+        swap(arr[min_idx], arr[i]);
+    }
+}

@@ -12,10 +12,7 @@
 using namespace std;
 
 //quickSort functions
-int partitionC(vector<int> &arr, long long start, long long end, long long &comparison);
 void quickSortC(vector<int> &arr, long long start, long long end, long long &comparison);
-
-int partitionT(vector<int> &arr, long long start, long long end);
 void quickSortT(vector<int> &arr, long long start, long long end);
 
 //bubbleSort functions
@@ -23,3 +20,9 @@ void bubbleSortC(vector<int> &arr, long long n, long long &comparision);
 void bubbleSortT(vector<int> &arr, long long n);
 
 //insertionSort functions
+
+
+//selectionSort functions
+void selectionSortC(vector<int> &arr, int n, long long &comp);
+void selectionSortT(vector<int> &arr, int n);
+

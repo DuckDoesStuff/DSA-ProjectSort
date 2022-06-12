@@ -42,6 +42,7 @@ int runAlgoT(int algo, vector<int> &arr) {
     case 4://Heap sort
         break;
     case 5://Selection sort
+        selectionSortT(arr, arr.size());
         break;
     case 6://Radix sort
         break;
@@ -69,6 +70,7 @@ void runAlgoCmp(int algo, vector<int> &arr, long long &comparison) {
     case 4://Heap sort
         break;
     case 5://Selection sort
+        selectionSortC(arr, arr.size(), comparison);
         break;
     case 6://Radix sort
         break;
@@ -158,7 +160,7 @@ void algoMode(char* argv[], int &argc) {
             }
         else {//Output both
             vector<vector<int>> arrT = arr;
-            int time[4] = {-1, -1, -1, -1};
+            int time[4] = {-1};
             long long comp[4] = {0};
 
             //Measure time
