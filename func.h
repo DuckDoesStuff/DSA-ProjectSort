@@ -26,3 +26,11 @@ void insertionSortC(vector<int>& arr, int n, long long &comparison);
 //selectionSort functions
 void selectionSortC(vector<int> &arr, int n, long long &comp);
 void selectionSortT(vector<int> &arr, int n);
+
+//heapSort functions
+void heapifyC(vector<int>& arr, int n, int i, long long &comp);
+void heapSortC(vector<int>& arr, int n, long long &comp);
+
+void heapifyT(vector<int>& arr, int n, int i);
+void heapSortT(vector<int>& arr, int n);
+

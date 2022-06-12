@@ -29,7 +29,8 @@ void runAlgoCCmp(int algo, vector<int> &arr, long long &comparision) {
     case 3:
         insertionSortC(arr, arr.size(), comparision);
         break;
-    case 4://Heap sort
+    case 4:
+        heapSortC(arr, arr.size(), comparision);
         break;
     case 5:
         selectionSortC(arr, arr.size(), comparision);
@@ -56,7 +57,8 @@ int runAlgoCT(int algo, vector<int> &arr) {
     case 3:
         insertionSortT(arr, arr.size());
         break;
-    case 4://Heap sort
+    case 4:
+        heapSortT(arr, arr.size());
         break;
     case 5:
         selectionSortT(arr, arr.size());

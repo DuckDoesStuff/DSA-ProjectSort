@@ -120,3 +120,58 @@ void selectionSortT(vector<int> &arr, int n) {
         swap(arr[min_idx], arr[i]);
     }
 }
+
+//heapSort functions
+void heapifyC(vector<int>& arr, int n, int i,long long &compare) {
+    int largest = i;
+    int l = 2 * i + 1;
+    int r = 2 * i + 2;
+ 
+    if (++compare&&l < n && ++compare&&arr[l] > arr[largest])
+    {
+        largest = l;
+ 	}
+    
+    if (++compare&&r < n &&++compare&& arr[r] > arr[largest])
+    {
+        largest = r;
+ 	}
+    
+    if (++compare&&largest != i) {
+        swap(arr[i], arr[largest]); 
+        heapifyC(arr, n, largest,compare);
+    }
+} 
+void heapSortC(vector<int>& arr, int n,long long &compare) {
+    for (int i = n / 2 - 1; ++compare&&i >= 0; i--){
+        heapifyC(arr, n, i,compare);
+    }
+ 
+    for (int i = n - 1;++compare&& i > 0; i--) {
+        swap(arr[0], arr[i]);
+        heapifyC(arr, i, 0,compare);
+    }
+}
+
+void heapifyT(vector<int>& arr, int n, int i) {
+    int largest = i;
+    int l = 2 * i + 1;
+    int r = 2 * i + 2;
+
+    if (l < n && arr[l] > arr[largest])
+        largest = l;
+    if (r < n && arr[r] > arr[largest])
+        largest = r;
+    if (largest != i) {
+        swap(arr[i], arr[largest]);
+        heapifyT(arr, n, largest);
+    }
+}
+void heapSortT(vector<int>& arr, int n) {
+    for (int i = n / 2 - 1; i >= 0; i--)
+        heapifyT(arr, n, i);
+    for (int i = n - 1; i > 0; i--) {
+        swap(arr[0], arr[i]);
+        heapifyT(arr, i, 0);
+    }
+}

@@ -40,7 +40,8 @@ int runAlgoT(int algo, vector<int> &arr) {
     case 3:
         insertionSortT(arr, arr.size());
         break;
-    case 4://Heap sort
+    case 4:
+        heapSortT(arr, arr.size());
         break;
     case 5:
         selectionSortT(arr, arr.size());
@@ -69,7 +70,8 @@ void runAlgoCmp(int algo, vector<int> &arr, long long &comparison) {
     case 3:
         insertionSortC(arr, arr.size(), comparison);
         break;
-    case 4://Heap sort
+    case 4:
+        heapSortC(arr, arr.size(), comparison);
         break;
     case 5:
         selectionSortC(arr, arr.size(), comparison);
@@ -160,7 +162,7 @@ void algoMode(char* argv[], int &argc) {
 
                 outputConsole(time, 0, 2);
             }
-        else {//Output both
+        else if (getOutput(argv[argc - 1]) == 3) {//Output both
             vector<vector<int>> arrT = arr;
             int time[4] = {-1};
             long long comp[4] = {0};
@@ -176,6 +178,8 @@ void algoMode(char* argv[], int &argc) {
                 getDataOrder("", i);
                 outputConsole(time[i], comp[i], 3);
             }
+        }else {
+            cout << "Wrong output type" << endl;
         }
         return;
     }else {
@@ -187,17 +191,20 @@ void algoMode(char* argv[], int &argc) {
             int time = -1;
             time = runAlgoT(getAlgoName(argv[2]), arr[0]);
             outputConsole(time, 0, 2);
-        }else {
+        }else if(getOutput(argv[argc - 1]) == 3) {
             long long comparison = 0;
             int time = -1;
             vector<vector<int>> arrT = arr;
             runAlgoCmp(getAlgoName(argv[2]), arr[0], comparison);
             time = runAlgoT(getAlgoName(argv[2]), arrT[0]);
             outputConsole(time, comparison, 3);
+        }else {
+            cout << "Wrong output type" << endl;
+            return;
         }
-
-        writeFile(arr[0], "output.txt");
     }
+
+    writeFile(arr[0], "output.txt");
 
     return;
 }
