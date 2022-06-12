@@ -13,7 +13,9 @@ using namespace std;
 
 void outputAlgoNameC(int algo);
 
-int runAlgoC(int algo, vector<int> &arr, long long &comparison);
+void runAlgoCCmp(int algo, vector<int> &arr, long long &comparison);
+
+int runAlgoCT(int algo, vector<int> &arr);
 
 int getAlgoNameC(string args);
 

@@ -17,8 +17,7 @@ void writeFileC(vector<int> &arr, string fileName) {
     out.close();
 }
 
-int runAlgoC(int algo, vector<int> &arr, long long &comparision) {
-    auto start = chrono::high_resolution_clock::now();
+void runAlgoCCmp(int algo, vector<int> &arr, long long &comparision) {
     switch (algo)
     {
     case 1:
@@ -32,6 +31,33 @@ int runAlgoC(int algo, vector<int> &arr, long long &comparision) {
     case 4://Heap sort
         break;
     case 5://Selection sort
+        selectionSortC(arr, arr.size(), comparision);
+        break;
+    case 6://Radix sort
+        break;
+    case 7://Merge sort
+        break;
+    default:
+        break;
+    }
+}
+
+int runAlgoCT(int algo, vector<int> &arr) {
+    auto start = chrono::high_resolution_clock::now();
+    switch (algo)
+    {
+    case 1:
+        quickSortT(arr, 0, arr.size() - 1);
+        break;
+    case 2:
+        bubbleSortT(arr, arr.size());
+        break;
+    case 3://Insertion sort
+        break;
+    case 4://Heap sort
+        break;
+    case 5://Selection sort
+        selectionSortT(arr, arr.size());
         break;
     case 6://Radix sort
         break;
@@ -94,25 +120,29 @@ void compMode(char* argv[], int &argc) {
     cout << " | ";
     outputAlgoNameC(getAlgoNameC(argv[3]));
     cout << endl;
-    vector<int> arr1;
+    vector<int> arrT1;
     if(argc == 5) {
         //Command 4
-        arr1 = readFromPathC(argv);
+        arrT1 = readFromPathC(argv);
     } else if(argc == 6) {
         //Command 5
-        GenerateData(arr1, stoi(argv[4]), getDataOrderC(argv[5], -1));
-        writeFileC(arr1, "input.txt");
+        GenerateData(arrT1, stoi(argv[4]), getDataOrderC(argv[5], -1));
+        writeFileC(arrT1, "input.txt");
     }
-    vector<int> arr2 = arr1;
+    vector<int> arrC1 = arrT1;
+    vector<int> arrC2 = arrT1;
+    vector<int> arrT2 = arrT1;
 
-    long long comparision1 = 0;
-    int time1 = runAlgoC(getAlgoNameC(argv[2]), arr1, comparision1);
+    long long comparison1 = 0;
+    runAlgoCCmp(getAlgoNameC(argv[2]), arrC1, comparison1);
+    int time1 = runAlgoCT(getAlgoNameC(argv[2]), arrT1);
 
-    long long comparision2 = 0;
-    int time2 = runAlgoC(getAlgoNameC(argv[3]), arr2, comparision2);
+    long long comparison2 = 0;
+    runAlgoCCmp(getAlgoNameC(argv[3]), arrC2, comparison2);
+    int time2 = runAlgoCT(getAlgoNameC(argv[3]), arrT2);
 
     cout << "Running time: " << time1 << " | " << time2 << endl;
-    cout << "Comparisions: " << comparision1 << " | " << comparision2 << endl;
+    cout << "Comparisions: " << comparison1 << " | " << comparison2 << endl;
 }
 
 vector<int> readFromPathC(char* argv[]) {
