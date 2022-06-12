@@ -34,3 +34,9 @@ void heapSortC(vector<int>& arr, int n, long long &comp);
 void heapifyT(vector<int>& arr, int n, int i);
 void heapSortT(vector<int>& arr, int n);
 
+//mergeSort functions
+void mergeT(vector<int>& arr, int l, int m, int r);
+void mergeSortT(vector<int>& arr, int l, int r);
+
+void mergeC(vector<int>& arr, int l, int m, int r, long long &comp);
+void mergeSortC(vector<int>& arr, int l, int r, long long &comp);

@@ -175,3 +175,66 @@ void heapSortT(vector<int>& arr, int n) {
         heapifyT(arr, i, 0);
     }
 }
+
+//mergeSort functions
+void mergeT(vector<int>& arr, int l, int m, int r) {
+    vector<int> leftArr(m-l+1), rightArr(r-m);
+
+    for(int i = l; i < m; i++) 
+        leftArr[i - l] = arr[i];
+    for(int i = m + 1; i < r; i++)
+        rightArr[i - m] = arr[i];
+
+    int left = leftArr.size(), right = rightArr.size();
+    int i = 0, j = 0, k = l;
+    while(i < left && j < right) {
+        if(leftArr[i] <= rightArr[j])
+            arr[k++] = leftArr[i++];
+        else
+            arr[k++] = rightArr[j++];
+    }
+
+    while(i < left)
+        arr[k++] = leftArr[i++];
+    while(j < right)
+        arr[k++] = rightArr[j++];
+}
+void mergeSortT(vector<int>& arr, int l, int r) {
+    if(l >= r) return;
+    int m = l + (r - l)/2;
+
+    mergeSortT(arr, l, m);
+    mergeSortT(arr, m + 1, r);
+    mergeT(arr, l, m, r);
+}
+
+void mergeC(vector<int>& arr, int l, int m, int r, long long &comp) {
+    vector<int> leftArr(m-l+1), rightArr(r-m);
+
+    for(int i = l;++comp && i < m; i++) 
+        leftArr[i - l] = arr[i];
+    for(int i = m + 1;++comp && i < r; i++)
+        rightArr[i - m] = arr[i];
+
+    int left = leftArr.size(), right = rightArr.size();
+    int i = 0, j = 0, k = l;
+    while(++comp && i < left && ++comp && j < right) {
+        if(++comp && leftArr[i] <= rightArr[j])
+            arr[k++] = leftArr[i++];
+        else
+            arr[k++] = rightArr[j++];
+    }
+
+    while(++comp && i < left)
+        arr[k++] = leftArr[i++];
+    while(++comp && j < right)
+        arr[k++] = rightArr[j++];
+}
+void mergeSortC(vector<int>& arr, int l, int r, long long &comp) {
+    if(++comp && l >= r) return;
+    int m = l + (r - l)/2;
+
+    mergeSortC(arr, l, m, comp);
+    mergeSortC(arr, m + 1, r, comp);
+    mergeC(arr, l, m, r, comp);
+}
