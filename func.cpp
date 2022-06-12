@@ -64,7 +64,33 @@ void bubbleSortT(vector<int> &arr, long long n)
 
 
 //insertionSort functions
+void insertionSortT(vector<int>& arr, int n){
+    for (int i = 1; i < n; i++)
+    {
+        int temp = arr[i];
+        int j = i;
+        while (j > 0 && arr[j - 1] > temp)
+        {
+            arr[j] = arr[j - 1];
+            j--;
+        }
+        arr[j] = temp;
+    }
+}
 
+void insertionSortC(vector<int>& arr, int n, long long &comparison){
+    for (int i = 1;++comparison && i < n; i++)
+    {
+        int temp = arr[i];
+        int j = i;
+        while (++comparison && j > 0 && ++comparison && arr[j - 1] > temp)
+        {
+            arr[j] = arr[j - 1];
+            j--;
+        }
+        arr[j] = temp;
+    }
+}
 
 //selectionSort functions
 void selectionSortC(vector<int> &arr, int n, long long &comp) {

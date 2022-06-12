@@ -20,9 +20,9 @@ void bubbleSortC(vector<int> &arr, long long n, long long &comparision);
 void bubbleSortT(vector<int> &arr, long long n);
 
 //insertionSort functions
-
+void insertionSortT(vector<int>& arr, int n);
+void insertionSortC(vector<int>& arr, int n, long long &comparison);
 
 //selectionSort functions
 void selectionSortC(vector<int> &arr, int n, long long &comp);
 void selectionSortT(vector<int> &arr, int n);
-

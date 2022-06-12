@@ -26,11 +26,12 @@ void runAlgoCCmp(int algo, vector<int> &arr, long long &comparision) {
     case 2:
         bubbleSortC(arr, arr.size(), comparision);
         break;
-    case 3://Insertion sort
+    case 3:
+        insertionSortC(arr, arr.size(), comparision);
         break;
     case 4://Heap sort
         break;
-    case 5://Selection sort
+    case 5:
         selectionSortC(arr, arr.size(), comparision);
         break;
     case 6://Radix sort
@@ -52,11 +53,12 @@ int runAlgoCT(int algo, vector<int> &arr) {
     case 2:
         bubbleSortT(arr, arr.size());
         break;
-    case 3://Insertion sort
+    case 3:
+        insertionSortT(arr, arr.size());
         break;
     case 4://Heap sort
         break;
-    case 5://Selection sort
+    case 5:
         selectionSortT(arr, arr.size());
         break;
     case 6://Radix sort
