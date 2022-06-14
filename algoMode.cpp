@@ -46,7 +46,8 @@ int runAlgoT(int algo, vector<int> &arr) {
     case 5:
         selectionSortT(arr, arr.size());
         break;
-    case 6://Radix sort
+    case 6:
+        radixSortT(arr, arr.size());
         break;
     case 7:
         mergeSortT(arr, 0, arr.size() - 1);
@@ -77,7 +78,8 @@ void runAlgoCmp(int algo, vector<int> &arr, long long &comparison) {
     case 5:
         selectionSortC(arr, arr.size(), comparison);
         break;
-    case 6://Radix sort
+    case 6:
+        radixSortC(arr, arr.size(), comparison);
         break;
     case 7:
         mergeSortC(arr, 0, arr.size() - 1, comparison);

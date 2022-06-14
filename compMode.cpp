@@ -17,28 +17,29 @@ void writeFileC(vector<int> &arr, string fileName) {
     out.close();
 }
 
-void runAlgoCCmp(int algo, vector<int> &arr, long long &comparision) {
+void runAlgoCCmp(int algo, vector<int> &arr, long long &comparison) {
     switch (algo)
     {
     case 1:
-        quickSortC(arr, 0, arr.size() - 1, comparision);
+        quickSortC(arr, 0, arr.size() - 1, comparison);
         break;
     case 2:
-        bubbleSortC(arr, arr.size(), comparision);
+        bubbleSortC(arr, arr.size(), comparison);
         break;
     case 3:
-        insertionSortC(arr, arr.size(), comparision);
+        insertionSortC(arr, arr.size(), comparison);
         break;
     case 4:
-        heapSortC(arr, arr.size(), comparision);
+        heapSortC(arr, arr.size(), comparison);
         break;
     case 5:
-        selectionSortC(arr, arr.size(), comparision);
+        selectionSortC(arr, arr.size(), comparison);
         break;
-    case 6://Radix sort
+    case 6:
+        radixSortC(arr, arr.size(), comparison);
         break;
     case 7:
-        mergeSortC(arr, 0, arr.size() - 1, comparision);
+        mergeSortC(arr, 0, arr.size() - 1, comparison);
         break;
     default:
         break;
@@ -64,7 +65,8 @@ int runAlgoCT(int algo, vector<int> &arr) {
     case 5:
         selectionSortT(arr, arr.size());
         break;
-    case 6://Radix sort
+    case 6:
+        radixSortT(arr, arr.size());
         break;
     case 7:
         mergeSortT(arr, 0, arr.size() - 1);

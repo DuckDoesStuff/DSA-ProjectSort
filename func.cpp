@@ -1,59 +1,59 @@
 #include "func.h"
 
 //quickSort functions
-void quickSortC(vector<int> &arr, long long l, long long r, long long &comp) {
-	int p = arr[(l + r) / 2];
-	int i = l, j = r;
-
-	while (++comp && i < j) {
-		while (++comp && arr[i] < p) i++;
-		while (++comp && arr[j] > p) j--;
-		if (++comp && i <= j) {
-			swap(arr[i], arr[j]);
-			i++;
-			j--;
-		}
-	}
-	if (++comp && i < r) {
-		quickSortC(arr, i, r, comp);
-	}
-	if (++ comp && l < j) {
-		quickSortC(arr, l, j, comp);
-	}
+int partitionC(vector<int> &arr, int l, int r, long long &comp) {
+    int pivot = arr[l+(r-l)/2];
+    int left = l, right = r;
+    while(++comp && left <= right) {
+        while(++comp && arr[left] < pivot) left++;
+        while(++comp && arr[right] > pivot) right--;
+        if(++comp && left <= right) {
+            swap(arr[left], arr[right]);
+            left++;right--;
+        }
+    }
+    return left;
+}
+void quickSortC(vector<int> &arr, int l, int r, long long &comp) {
+    int p = partitionC(arr, l, r, comp);
+    if(++comp && l < p - 1)
+        quickSortC(arr, l, p - 1, comp);
+    if(++comp && r > p)
+        quickSortC(arr, p, r, comp);
 }
 
-void quickSortT(vector<int> &arr, long long l, long long r) {
-	int p = arr[(l + r) / 2];
-	int i = l, j = r;
-
-	while (i < j) {
-		while (arr[i] < p) i++;
-		while (arr[j] > p) j--;
-		if (i <= j) {
-			swap(arr[i], arr[j]);
-			i++;
-			j--;
-		}
-	}
-	if (i < r) {
-		quickSortT(arr, i, r);
-	}
-	if (l < j) {
-		quickSortT(arr, l, j);
-	}
+int partitionT(vector<int> &arr, int l, int r) {
+    int pivot = arr[l+(r-l)/2];
+    int left = l, right = r;
+    while(left <= right) {
+        while(arr[left] < pivot) left++;
+        while(arr[right] > pivot) right--;
+        if(left <= right) {
+            swap(arr[left], arr[right]);
+            left++;right--;
+        }
+    }
+    return left;
+}
+void quickSortT(vector<int> &arr, int l, int r) {
+    int p = partitionT(arr, l, r);
+    if(l < p - 1)
+        quickSortT(arr, l, p - 1);
+    if(r > p)
+        quickSortT(arr, p, r);
 }
 
 //bubbleSort functions
-void bubbleSortC(vector<int> &arr, long long n, long long &comparision)
+void bubbleSortC(vector<int> &arr, int n, long long &comp)
 {
     int i, j;
-    for (i = 0;++comparision && i < n - 1; i++)
-        for (j = 0;++comparision && j < n - i - 1; j++)
-            if (++comparision && arr[j] > arr[j + 1])
+    for (i = 0;++comp && i < n - 1; i++)
+        for (j = 0;++comp && j < n - i - 1; j++)
+            if (++comp && arr[j] > arr[j + 1])
                 swap(arr[j], arr[j + 1]);
 }
 
-void bubbleSortT(vector<int> &arr, long long n)
+void bubbleSortT(vector<int> &arr, int n)
 {
     int i, j;
     for (i = 0;i < n - 1; i++)
@@ -78,12 +78,12 @@ void insertionSortT(vector<int>& arr, int n){
     }
 }
 
-void insertionSortC(vector<int>& arr, int n, long long &comparison){
-    for (int i = 1;++comparison && i < n; i++)
+void insertionSortC(vector<int>& arr, int n, long long &comp){
+    for (int i = 1;++comp && i < n; i++)
     {
         int temp = arr[i];
         int j = i;
-        while (++comparison && j > 0 && ++comparison && arr[j - 1] > temp)
+        while (++comp && j > 0 && ++comp && arr[j - 1] > temp)
         {
             arr[j] = arr[j - 1];
             j--;
@@ -122,34 +122,34 @@ void selectionSortT(vector<int> &arr, int n) {
 }
 
 //heapSort functions
-void heapifyC(vector<int>& arr, int n, int i,long long &compare) {
+void heapifyC(vector<int>& arr, int n, int i,long long &comp) {
     int largest = i;
     int l = 2 * i + 1;
     int r = 2 * i + 2;
  
-    if (++compare&&l < n && ++compare&&arr[l] > arr[largest])
+    if (++comp && l < n && ++comp && arr[l] > arr[largest])
     {
         largest = l;
  	}
     
-    if (++compare&&r < n &&++compare&& arr[r] > arr[largest])
+    if (++comp && r < n && ++comp && arr[r] > arr[largest])
     {
         largest = r;
  	}
     
-    if (++compare&&largest != i) {
+    if (++comp && largest != i) {
         swap(arr[i], arr[largest]); 
-        heapifyC(arr, n, largest,compare);
+        heapifyC(arr, n, largest, comp);
     }
 } 
-void heapSortC(vector<int>& arr, int n,long long &compare) {
-    for (int i = n / 2 - 1; ++compare&&i >= 0; i--){
-        heapifyC(arr, n, i,compare);
+void heapSortC(vector<int>& arr, int n,long long &comp) {
+    for (int i = n / 2 - 1; ++comp && i >= 0; i--){
+        heapifyC(arr, n, i, comp);
     }
  
-    for (int i = n - 1;++compare&& i > 0; i--) {
+    for (int i = n - 1;++comp && i > 0; i--) {
         swap(arr[0], arr[i]);
-        heapifyC(arr, i, 0,compare);
+        heapifyC(arr, i, 0,comp);
     }
 }
 
@@ -238,3 +238,63 @@ void mergeSortC(vector<int>& arr, int l, int r, long long &comp) {
     mergeSortC(arr, m + 1, r, comp);
     mergeC(arr, l, m, r, comp);
 }
+
+//radixSort functions
+void radixSortT(vector<int>& arr, int n) {
+    vector<int> sorted(n, 0);
+    int max = arr[0], exp = 1;
+
+    for(int i = 1; i < n; i++)
+        if(arr[i] > max) max = arr[i];
+
+    while(max / exp > 0) {//while we haven't go through every digits
+        int count[10] = { 0 };//array to store digit occurences count
+
+        //Count occurences of digits
+        for(int i = 0; i < n; i++) 
+            count[(arr[i] / exp) % 10]++;
+        
+        //Our counting array will now show the correct position of digit i
+        for(int i = 1; i < 10; i++)
+            count[i] += count[i-1];
+
+        //Rearrange our elements based on their digit position
+        for(int i = n - 1; i >= 0; i--) {
+            sorted[count[(arr[i] / exp) % 10]] = arr[i];
+            count[(arr[i] / exp) % 10]--;
+        }
+
+        arr = sorted;//Copy to our array
+        exp *= 10;//Increase expotential to sort the next digit
+    }
+}
+
+void radixSortC(vector<int>& arr, int n, long long &comp) {
+    vector<int> sorted(n, 0);
+    int max = arr[0], exp = 1;
+
+    for(int i = 1;++comp && i < n; i++)
+        if(++comp && arr[i] > max) max = arr[i];
+
+    while(++comp && max / exp > 0) {//while we haven't go through every digits
+        int count[10] = { 0 };//array to store digit occurences count
+
+        //Count occurences of digits
+        for(int i = 0;++comp && i < n; i++) 
+            count[(arr[i] / exp) % 10]++;
+        
+        //Our counting array will now show the correct position of digit i
+        for(int i = 1;++comp && i < 10; i++)
+            count[i] += count[i-1];
+
+        //Rearrange our elements based on their digit position
+        for(int i = n - 1;++comp && i >= 0; i--) {
+            sorted[count[(arr[i] / exp) % 10]] = arr[i];
+            count[(arr[i] / exp) % 10]--;
+        }
+
+        arr = sorted;//Copy to our array
+        exp *= 10;//Increase expotential to sort the next digit
+    }
+}
+
