@@ -2,7 +2,8 @@
 
 void outputAlgoNameC(int algo) {
     string algoName[] = {"Quick sort", "Bubble sort", "Insertion sort", "Heap sort",
-                         "Selection sort", "Radix sort", "Merge sort"};
+                         "Selection sort", "Radix sort", "Merge sort", "Shaker sort", 
+                         "Counting sort", "Shell sort", "Flash sort"};
     cout << algoName[algo - 1];
 }
 
@@ -41,6 +42,14 @@ void runAlgoCCmp(int algo, vector<int> &arr, long long &comparison) {
     case 7:
         mergeSortC(arr, 0, arr.size() - 1, comparison);
         break;
+    case 8://shakerSort
+        break;
+    case 9://countingSort
+        break;
+    case 10://shellSort
+        break;
+    case 11://flashSort
+        break;
     default:
         break;
     }
@@ -71,6 +80,14 @@ int runAlgoCT(int algo, vector<int> &arr) {
     case 7:
         mergeSortT(arr, 0, arr.size() - 1);
         break;
+    case 8://shakerSort
+        break;
+    case 9://countingSort
+        break;
+    case 10://shellSort
+        break;
+    case 11://flashSort
+        break;
     default:
         break;
     }
@@ -94,6 +111,14 @@ int getAlgoNameC(string args) {
         return 6;
     else if (args == "merge-sort")
         return 7;
+    else if (args == "shaker-sort")
+        return 8;
+    else if (args == "counting-sort")
+        return 9;
+    else if (args == "shell-sort")
+        return 10;
+    else if (args == "flash-sort")
+        return 11;
     else return -1;
 }
 
