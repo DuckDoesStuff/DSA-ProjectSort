@@ -11,26 +11,22 @@
 
 using namespace std;
 
-void writeFile(vector<int> &arr, string fileName);
+void algoMode(char* argv[], int &argc);
 
-void outputConsole(int time, long long comparison, int output);
+int getDataOrder(string args, int type);
+vector<vector<int>> makeInput(char* argv[], int &argc, bool &flag);
 
+int getAlgoName(string args);
 void outputAlgoName(int algo);
 
 int runAlgoT(int algo, vector<int> &arr);
-
 void runAlgoCmp(int algo, vector<int> &arr, long long &comparison);
 
-bool isNum(string args);
-
-int getAlgoName(string args);
-
-int getDataOrder(string args, int type);
-
 int getOutput(string args);
+void outputConsole(int time, long long comparison, int output);
 
-void algoMode(char* argv[], int &argc);
+void writeFile(vector<int> &arr, string fileName);
 
+bool isNum(string args);
 vector<int> genNewInput(long long size, int dataOrder);
 vector<int> readFromPath(char* argv[]);
-vector<vector<int>> makeInput(char* argv[], int &argc, bool &flag);
