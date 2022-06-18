@@ -329,7 +329,7 @@ void shellSortC(vector<int>& arr, int n,long long &compare) {
 //countingSort functions
 void countingSortT(vector<int>& arr, int n)
 {
-    int max = INT_MIN, min = INT_MAX;
+    int max = -100000, min = 100000;
     for(int i = 0; i < n; i++) {
         if(arr[i] > max) max = arr[i];
         if(arr[i] < min) min = arr[i];
@@ -354,7 +354,7 @@ void countingSortT(vector<int>& arr, int n)
 
 void countingSortC(vector<int>& arr, int n, long long &comp)
 {
-    int max = INT_MIN, min = INT_MAX;
+    int max = -100000, min = 100000;
     for(int i = 0;++comp && i < n; i++) {
         if(++comp && arr[i] > max) max = arr[i];
         if(++comp && arr[i] < min) min = arr[i];
@@ -381,7 +381,7 @@ void countingSortC(vector<int>& arr, int n, long long &comp)
 void flashSortT(vector<int>& arr, int n) {
     int index = (int)(0.45*n);
     vector<int> L(index, 0);
-    int minVal = INT_MAX, maxIndex = INT_MIN;
+    int minVal = 100000, maxIndex = -10000;
 
     for(int i = 0; i < n; i++) {
         if(minVal > arr[i]) minVal = arr[i];
