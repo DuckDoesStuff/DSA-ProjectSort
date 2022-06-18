@@ -376,3 +376,47 @@ void countingSortC(vector<int>& arr, int n, long long &comp)
     for (int i = 0;++comp && i < n; i++)
         arr[i] = output[i];
 }
+
+//flashSort functions
+void flashSortT(vector<int>& arr, int n) {
+    int index = (int)(0.45*n);
+    vector<int> L(index, 0);
+    int minVal = INT_MAX, maxIndex = INT_MIN;
+
+    for(int i = 0; i < n; i++) {
+        if(minVal > arr[i]) minVal = arr[i];
+        if(maxIndex < arr[maxIndex]) maxIndex = i;
+    }
+
+    double c = (double)(index - 1) / (arr[maxIndex] - minVal);
+    for (int i = 0; i < n; i++) {
+		int k = int(c * (arr[i] - minVal));
+		++L[k];
+	}
+    swap(arr[0], arr[maxIndex]);
+    int move = 0;
+	int j = 0;
+	int k = index - 1;
+	int t = 0;
+	int flash;
+	while (move < n - 1)
+	{
+		while (j > L[k] - 1)
+		{
+			j++;
+			k = int(c*(arr[j] - minVal));
+		}
+		flash = arr[j];
+		if (k < 0) break;
+		while (j != L[k])
+		{
+			k = int(c*(flash - minVal));
+			int hold = arr[t = --L[k]];
+			arr[t] = flash;
+			flash = hold;
+			++move;
+		}
+	}
+	insertionSortT(arr, n);
+}
+

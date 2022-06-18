@@ -61,7 +61,8 @@ int runAlgoT(int algo, vector<int> &arr) {
     case 10:
         shellSortT(arr, arr.size());
         break;
-    case 11://flashSort
+    case 11:
+        flashSortT(arr, arr.size());
         break;
     default:
         break;

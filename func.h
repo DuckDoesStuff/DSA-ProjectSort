@@ -52,3 +52,6 @@ void shellSortC(vector<int>& arr, int n,long long &compare);
 //countingSort fuctions
 void countingSortT(vector<int>& arr, int n);
 void countingSortC(vector<int>& arr, int n, long long &comp);
+
+//flashSort functions
+void flashSortT(vector<int>& arr, int n);
