@@ -45,5 +45,10 @@ void mergeSortC(vector<int>& arr, int l, int r, long long &comp);
 void radixSortT(vector<int>& arr, int n);
 void radixSortC(vector<int>& arr, int n, long long &comp);
 
-//shakerSort functios
+//shellSort functions
+void shellSortT(vector<int>& arr, int n);
+void shellSortC(vector<int>& arr, int n,long long &compare);
 
+//countingSort fuctions
+void countingSortT(vector<int>& arr, int n);
+void countingSortC(vector<int>& arr, int n, long long &comp);

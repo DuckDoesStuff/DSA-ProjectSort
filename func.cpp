@@ -298,3 +298,81 @@ void radixSortC(vector<int>& arr, int n, long long &comp) {
     }
 }
 
+//shellSort functions
+void shellSortT(vector<int>& arr, int n) {
+  for (int interval = n / 2; interval > 0; interval /= 2) {
+    for (int i = interval; i < n; i += 1) {
+      int temp = arr[i];
+      int j;
+      for (j = i; j >= interval && arr[j - interval] > temp; j -= interval) 
+        arr[j] = arr[j - interval];
+      
+      arr[j] = temp;
+    }
+  }
+}
+
+void shellSortC(vector<int>& arr, int n,long long &compare) {	
+  for (int interval = n / 2; ++compare && interval > 0; interval /= 2) {
+    for (int i = interval;++compare && i < n; i += 1) 
+	{
+      int temp = arr[i];
+      int j;
+      for (j = i; ++compare && j >= interval && ++compare && arr[j - interval] > temp; j -= interval)	
+        arr[j] = arr[j - interval];
+      
+      arr[j] = temp;
+    } 
+  }
+}
+
+//countingSort functions
+void countingSortT(vector<int>& arr, int n)
+{
+    int max = INT_MIN, min = INT_MAX;
+    for(int i = 0; i < n; i++) {
+        if(arr[i] > max) max = arr[i];
+        if(arr[i] < min) min = arr[i];
+    }
+    int range = max - min + 1;
+
+    vector<int> count(range), output(arr.size());
+    for (int i = 0; i < arr.size(); i++)
+        count[arr[i] - min]++;
+
+    for (int i = 1; i < count.size(); i++)
+        count[i] += count[i - 1];
+
+    for (int i = arr.size() - 1; i >= 0; i--) {
+        output[count[arr[i] - min] - 1] = arr[i];
+        count[arr[i] - min]--;
+    }
+
+    for (int i = 0; i < arr.size(); i++)
+        arr[i] = output[i];
+}
+
+void countingSortC(vector<int>& arr, int n, long long &comp)
+{
+    int max = INT_MIN, min = INT_MAX;
+    for(int i = 0;++comp && i < n; i++) {
+        if(++comp && arr[i] > max) max = arr[i];
+        if(++comp && arr[i] < min) min = arr[i];
+    }
+    int range = max - min + 1;
+
+    vector<int> count(range), output(n);
+    for (int i = 0;++comp && i <n; i++)
+        count[arr[i] - min]++;
+
+    for (int i = 1;++comp && i < range; i++)
+        count[i] += count[i - 1];
+
+    for (int i = n - 1;++comp && i >= 0; i--) {
+        output[count[arr[i] - min] - 1] = arr[i];
+        count[arr[i] - min]--;
+    }
+
+    for (int i = 0;++comp && i < n; i++)
+        arr[i] = output[i];
+}
