@@ -329,7 +329,7 @@ void shellSortC(vector<int>& arr, int n,long long &compare) {
 //countingSort functions
 void countingSortT(vector<int>& arr, int n)
 {
-    int max = -100000, min = 100000;
+    int max = 0, min = 0;
     for(int i = 0; i < n; i++) {
         if(arr[i] > max) max = arr[i];
         if(arr[i] < min) min = arr[i];
@@ -354,7 +354,7 @@ void countingSortT(vector<int>& arr, int n)
 
 void countingSortC(vector<int>& arr, int n, long long &comp)
 {
-    int max = -100000, min = 100000;
+    int max = 0, min = 0;
     for(int i = 0;++comp && i < n; i++) {
         if(++comp && arr[i] > max) max = arr[i];
         if(++comp && arr[i] < min) min = arr[i];
@@ -379,44 +379,128 @@ void countingSortC(vector<int>& arr, int n, long long &comp)
 
 //flashSort functions
 void flashSortT(vector<int>& arr, int n) {
-    int index = (int)(0.45*n);
-    vector<int> L(index, 0);
-    int minVal = 100000, maxIndex = -10000;
+    int m = int(0.45 * n);
+    vector<int> l(m, 0);
+    int min = arr[0], max = 0;
 
-    for(int i = 0; i < n; i++) {
-        if(minVal > arr[i]) minVal = arr[i];
-        if(maxIndex < arr[maxIndex]) maxIndex = i;
+    for (int i = 0;i < n; i++) {
+        if (arr[i] < min) min = arr[i];
+        if (arr[i] > max) max = arr[i];
     }
 
-    double c = (double)(index - 1) / (arr[maxIndex] - minVal);
     for (int i = 0; i < n; i++) {
-		int k = int(c * (arr[i] - minVal));
-		++L[k];
-	}
-    swap(arr[0], arr[maxIndex]);
+        int k = int((m - 1) * (arr[i] - min) / (max - min));
+        ++l[k];
+    }   
+
+    for (int i = 1;i < m; i++) {
+        l[i] += l[i - 1];
+    }
+
+    int hold = arr[0];
     int move = 0;
-	int j = 0;
-	int k = index - 1;
-	int t = 0;
-	int flash;
-	while (move < n - 1)
-	{
-		while (j > L[k] - 1)
-		{
-			j++;
-			k = int(c*(arr[j] - minVal));
-		}
-		flash = arr[j];
-		if (k < 0) break;
-		while (j != L[k])
-		{
-			k = int(c*(flash - minVal));
-			int hold = arr[t = --L[k]];
-			arr[t] = flash;
-			flash = hold;
-			++move;
-		}
-	}
-	insertionSortT(arr, n);
+    int flash = 0;
+    int k = 0;
+    int t = 0;
+    int j = 0;
+
+    while (move < n - 1) {
+        while (j > l[k] - 1) {
+            j++;
+            k = int((m - 1) * (arr[j] - min) / (max - min));
+        }
+
+        flash = arr[j];
+        while (j != l[k]) {
+            k = int((m - 1) * (arr[j] - min) / (max - min));
+            hold = arr[t = --l[k]];
+            arr[t] = flash;
+            flash = hold;
+            move++;
+        }
+    }
+
+    insertionSortT(arr, n);
 }
 
+void flashSortC(vector<int>& arr, int n, long long &comp) {
+    int m = int(0.45 * n);
+    vector<int> l(m, 0);
+    int min = arr[0], max = 0;
+
+    for (int i = 0;++comp && i < n; i++) {
+        if (++comp && arr[i] < min) min = arr[i];
+        if (++comp && arr[i] > max) max = arr[i];
+    }
+
+    for (int i = 0; ++comp && i < n; i++) {
+        int k = int((m - 1) * (arr[i] - min) / (max - min));
+        ++l[k];
+    }
+
+    for (int i = 1; ++comp && i < m; i++) {
+        l[i] += l[i - 1];
+    }
+
+    int hold = arr[0];
+    int move = 0;
+    int flash = 0;
+    int k = 0;
+    int t = 0;
+    int j = 0;
+
+    while (++comp && move < n - 1) {
+        while (++comp && j > l[k] - 1) {
+            j++;
+            k = int((m - 1) * (arr[j] - min) / (max - min));
+        }
+
+        flash = arr[j];
+        while (++comp && j != l[k]) {
+            k = int((m - 1) * (arr[j] - min) / (max - min));
+            hold = arr[t = --l[k]];
+            arr[t] = flash;
+            flash = hold;
+            move++;
+        }
+    }
+
+    insertionSortC(arr, n, comp);
+}
+
+//shakerSort functions
+void ShakerSortT(vector<int>& arr, int n) {
+    int L = 0;
+    int R = n - 1;
+
+    for (int i = L; i < R; i++) {
+        for (int j = R; j > i; j--) {
+            if (arr[j] < arr[j - 1])
+                swap(arr[j], arr[j - 1]);
+        }
+        L++;
+        for (int j = L; j < R; j++) {
+            if (arr[j] > arr[j + 1])
+                swap(arr[j], arr[j + 1]);
+        }
+        R--;
+    }
+}
+
+void ShakerSortC(vector<int>& arr, int n, long long& comparison) {
+    int L = 0;
+    int R = n - 1;
+
+    for (int i = L; ++comparison && i < R; i++) {
+        for (int j = R; ++comparison && j > i; j--) {
+            if (++comparison && arr[j] < arr[j - 1])
+                swap(arr[j], arr[j - 1]);
+        }
+        L++;
+        for (int j = L; ++comparison && j < R; j++) {
+            if (++comparison && arr[j] > arr[j + 1])
+                swap(arr[j], arr[j + 1]);
+        }
+        R--;
+    }
+}

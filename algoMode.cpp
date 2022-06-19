@@ -53,7 +53,8 @@ int runAlgoT(int algo, vector<int> &arr) {
     case 7:
         mergeSortT(arr, 0, arr.size() - 1);
         break;
-    case 8://shakerSort
+    case 8:
+        ShakerSortT(arr, arr.size());
         break;
     case 9:
         countingSortT(arr, arr.size());
@@ -96,7 +97,8 @@ void runAlgoCmp(int algo, vector<int> &arr, long long &comparison) {
     case 7:
         mergeSortC(arr, 0, arr.size() - 1, comparison);
         break;
-    case 8://shakerSort
+    case 8:
+        ShakerSortC(arr, arr.size(), comparison);
         break;
     case 9:
         countingSortC(arr, arr.size(), comparison);
@@ -104,7 +106,8 @@ void runAlgoCmp(int algo, vector<int> &arr, long long &comparison) {
     case 10:
         shellSortC(arr, arr.size(), comparison);
         break;
-    case 11://flashSort
+    case 11:
+        flashSortC(arr, arr.size(), comparison);
         break;
     default:
         break;

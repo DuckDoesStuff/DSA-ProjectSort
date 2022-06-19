@@ -55,3 +55,8 @@ void countingSortC(vector<int>& arr, int n, long long &comp);
 
 //flashSort functions
 void flashSortT(vector<int>& arr, int n);
+void flashSortC(vector<int>& arr, int n, long long& comp);
+
+//shakerSort functios
+void ShakerSortT(vector<int>& arr, int n);
+void ShakerSortC(vector<int>& arr, int n, long long& comparison);
