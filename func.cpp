@@ -383,7 +383,7 @@ void flashSortT(vector<int>& arr, int n) {
     vector<int> l(m, 0);
     int min = arr[0], max = 0;
 
-    for (int i = 0;i < n; i++) {
+    for (int i = 0; i < n; i++) {
         if (arr[i] < min) min = arr[i];
         if (arr[i] > max) max = arr[i];
     }
@@ -391,7 +391,7 @@ void flashSortT(vector<int>& arr, int n) {
     for (int i = 0; i < n; i++) {
         int k = int((m - 1) * (arr[i] - min) / (max - min));
         ++l[k];
-    }   
+    }
 
     for (int i = 1;i < m; i++) {
         l[i] += l[i - 1];
@@ -412,7 +412,7 @@ void flashSortT(vector<int>& arr, int n) {
 
         flash = arr[j];
         while (j != l[k]) {
-            k = int((m - 1) * (arr[j] - min) / (max - min));
+            k = int((m - 1) * (flash - min) / (max - min));
             hold = arr[t = --l[k]];
             arr[t] = flash;
             flash = hold;
@@ -433,9 +433,8 @@ void flashSortC(vector<int>& arr, int n, long long &comp) {
         if (++comp && arr[i] > max) max = arr[i];
     }
 
-    double c = (double)(m - 1) / (max - min);
     for (int i = 0; ++comp && i < n; i++) {
-        int k = int(c * (arr[i] - min));
+        int k = int((m - 1) * (arr[i] - min) / (max - min));
         ++l[k];
     }
 
@@ -453,12 +452,12 @@ void flashSortC(vector<int>& arr, int n, long long &comp) {
     while (++comp && move < n - 1) {
         while (++comp && j > l[k] - 1) {
             j++;
-            k = int(c * (arr[j] - min));
+            k = int((m - 1) * (arr[j] - min) / (max - min));
         }
 
         flash = arr[j];
         while (++comp && j != l[k]) {
-            k = int(c * (flash - min));
+            k = int((m - 1) * (flash - min) / (max - min));
             hold = arr[t = --l[k]];
             arr[t] = flash;
             flash = hold;
